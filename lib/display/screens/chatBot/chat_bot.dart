@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
@@ -20,6 +21,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   final TextEditingController _controller = TextEditingController();
   List<Map<String, String>> messages = [];
   late GenerativeModel _model;
+  bool _isConnected = true;
 
   // Define el número máximo de mensajes a enviar como contexto
   static const int maxContextMessages = 10;
@@ -32,6 +34,23 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       apiKey: 'AIzaSyADl4iRQDNbimyFNgYJaFUvb-HTtk58Pyk', // Reemplaza con tu clave API
     );
     _loadMessages(); // Cargar los mensajes guardados al iniciar
+    _checkConnectivity(); // Verificar conectividad al iniciar
+    Connectivity().onConnectivityChanged.listen(_updateConnectivityStatus);
+  }
+
+  Future<void> _checkConnectivity() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    setState(() {
+      _isConnected = connectivityResult != ConnectivityResult.none;
+    });
+  }
+
+  Future<void> _updateConnectivityStatus(List<ConnectivityResult> result) async {
+    setState(() {
+      _isConnected = result.isNotEmpty && result.first != ConnectivityResult.none;
+    });
+    // ignore: avoid_print
+    print('Connectivity changed: $_isConnected');
   }
 
   // Método para cargar el historial y contexto guardado
@@ -154,12 +173,14 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                 ),
                 const SizedBox(width: 10),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: _isConnected
+                      ? () {
                     if (_controller.text.isNotEmpty) {
                       sendMessage(_controller.text); // Envía el mensaje
                       _controller.clear(); // Limpia el campo de texto
                     }
-                  },
+                  }
+                      : null, // Deshabilitar botón si no está conectado
                   child: const Text('Enviar'),
                 ),
               ],

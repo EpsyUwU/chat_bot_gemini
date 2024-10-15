@@ -32,7 +32,7 @@ class MyInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Mi Info',
+      title: 'Info',
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -40,9 +40,32 @@ class MyInfo extends StatelessWidget {
           children: [
             const CircleAvatar(
               radius: 90.0,
-              backgroundImage: AssetImage('assets/esteban.jpeg'), // Ruta de la imagen
+              backgroundImage: AssetImage('assets/UP.png'), // Ruta de la imagen
             ),
             const SizedBox(height: 30),
+            const Text(
+              'Universidad Politecnica de Chiapas',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            const Text(
+              'ingenieria en Software',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              '9B',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            const SizedBox(height: 10),
             const Text(
               'Carlos Esteban Rivera Perez',
               style: TextStyle(
@@ -51,7 +74,7 @@ class MyInfo extends StatelessWidget {
               ),
             ),
             const Text(
-              'Matricula: 213530',
+              '213530',
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.normal,
@@ -76,7 +99,7 @@ class MyInfo extends StatelessWidget {
                   color: Colors.black,
                   iconSize: 30.0,
                   onPressed: () {
-                    _launchApp('https://github.com/EpsyUwU');
+                    _launchApp('https://github.com/EstebanMakiatoOwO/chat_bot_gemini/blob/master/lib/display/screens/chatBot/chat_bot.dart');
                   },
                   tooltip: 'Abrir GitHub',
                 ),
