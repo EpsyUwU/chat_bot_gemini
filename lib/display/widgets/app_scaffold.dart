@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_challenges/display/screens/chatBot/chat_bot.dart';
 import 'package:flutter_challenges/display/screens/home.dart';
+import 'package:flutter_challenges/display/screens/locationGPS/locationGPS.dart';
 import 'package:flutter_challenges/display/screens/news/news_bottom_bar.dart';
 import 'package:flutter_challenges/display/screens/info/my_info.dart';
 
@@ -32,7 +33,8 @@ class AppScaffold extends StatelessWidget {
             const SizedBox(
               height: 120,
               child: DrawerHeader(
-                decoration: BoxDecoration(color: Color.fromARGB(255, 209, 171, 249)),
+                decoration:
+                    BoxDecoration(color: Color.fromARGB(255, 209, 171, 249)),
                 child: Text('Menú de Navegación'),
               ),
             ),
@@ -69,6 +71,13 @@ class AppScaffold extends StatelessWidget {
               title: const Text('chat bot'),
               onTap: () {
                 Navigator.push(context, ChatBotScreen.route());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.location_on_outlined),
+              title: const Text('Geo location'),
+              onTap: () {
+                Navigator.push(context, GeoLocation.route());
               },
             ),
           ],

@@ -46,7 +46,8 @@ class _InputState extends State<Input> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      displayedText = _controller.text; // Actualiza el texto ingresado
+                      displayedText =
+                          _controller.text; // Actualiza el texto ingresado
                     });
                   },
                   child: const Text('Mostrar'),
@@ -64,11 +65,9 @@ class _InputState extends State<Input> {
             ),
             const SizedBox(height: 20),
             // Lista de tarjetas de estudiantes
-
           ],
         ),
       ),
     );
   }
 }
-
